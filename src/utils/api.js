@@ -1,7 +1,7 @@
 import axios from "axios";
 export let baseURL = "https://shoeshop-backend.online"; //https://shoeshop-backend.online
 axios.defaults.baseURL = `${baseURL}`;
-export const deploy = "https://health-care-fe-two.vercel.app";
+export const deploy = "https://health-haven-nu.vercel.app";
 
 export const TypeHTTP = {
   GET: "get",
