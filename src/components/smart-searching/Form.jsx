@@ -121,7 +121,7 @@ const Form = ({ visible, hidden }) => {
       sendToken: false,
     }).then((res) => {
       const result = res
-        .filter((item) => item.patient._id === userData.user._id)
+        .filter((item) => item.patient._id === userData.user?._id)
         .filter(
           (item) =>
             item.appointment_date.day === convertDateInputToObject(date).day &&
