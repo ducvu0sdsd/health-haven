@@ -101,7 +101,7 @@ const ChoosePayment = () => {
             const localTimeOffset = currentDate.getTimezoneOffset(); // Local timezone offset in minutes
             const vietnamTime = new Date(
               currentDate.getTime() +
-                (vietnamTimeOffset + localTimeOffset) * 60000
+              (vietnamTimeOffset + localTimeOffset) * 60000
             );
             const time = {
               day: vietnamTime.getDate(),
@@ -154,6 +154,11 @@ const ChoosePayment = () => {
         body: formData,
         path: "/upload-image/save",
       }).then((listImage) => {
+        console.log({
+          ...bookingData.booking,
+          price_list: bookingData.booking.priceList._id,
+          images: listImage,
+        })
         api({
           type: TypeHTTP.POST,
           sendToken: false,
@@ -186,7 +191,7 @@ const ChoosePayment = () => {
             const localTimeOffset = currentDate.getTimezoneOffset(); // Local timezone offset in minutes
             const vietnamTime = new Date(
               currentDate.getTime() +
-                (vietnamTimeOffset + localTimeOffset) * 60000
+              (vietnamTimeOffset + localTimeOffset) * 60000
             );
             const time = {
               day: vietnamTime.getDate(),
