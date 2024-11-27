@@ -24,7 +24,7 @@ const ChoosePayment = ({ customer }) => {
 
   useEffect(() => {
     if (customer) {
-      setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${customer._id}2b`)
+      setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${customer.user._id}2b`)
     } else {
       if (bookingData.booking && step === 1) {
         setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${userData.user?._id}2b`)
