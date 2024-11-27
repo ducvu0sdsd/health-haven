@@ -245,17 +245,34 @@ const ChoosePayment = ({ customer }) => {
     }
   };
   useEffect(() => {
-    socket.on(`payment-appointment-online${userData.user?._id}`, (data) => {
-      if (data) {
-        handleSubmit();
-      } else {
-        globalHandler.notify(notifyType.WARNING, "Thanh Toán Thất Bại");
-      }
-    });
+    if (customer) {
+      socket.on(`payment-appointment-online${customer.user._id}`, (data) => {
+        if (data) {
+          handleSubmit()
+        } else {
+          utilsHandler.notify(notifyType.WARNING, "Thanh Toán Thất Bại")
+        }
+
+      })
+    } else {
+      socket.on(`payment-appointment-online${userData.user?._id}`, (data) => {
+        if (data) {
+          handleSubmit()
+        } else {
+          utilsHandler.notify(notifyType.WARNING, "Thanh Toán Thất Bại")
+        }
+
+      })
+    }
     return () => {
-      socket.off(`payment-appointment-online${userData.user?._id}`);
-    };
-  }, [userData.user?._id]);
+      if (customer) {
+        socket.off(`payment-appointment-online${customer.user._id}`);
+      } else {
+        socket.off(`payment-appointment-online${userData.user?._id}`);
+      }
+    }
+  }, [userData.user?._id, customer])
+
   return (
     <>
       <div className="border-[#cfcfcf] overflow-hidden relative w-[60%] gap-2 mt-6 rounded-md border-[1px] flex flex-col items-center">
