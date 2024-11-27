@@ -10,7 +10,7 @@ import {
 } from "@/utils/date";
 import { formatMoney } from "@/utils/other";
 import { useRouter } from "next/navigation";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 const socket = io.connect(baseURL);
 const ChoosePayment = ({ customer }) => {
@@ -20,13 +20,14 @@ const ChoosePayment = ({ customer }) => {
   const { appointmentHandler, appointmentData } =
     useContext(appointmentContext);
   const router = useRouter();
+  const [url, setUrl] = useState('')
 
   useEffect(() => {
     if (customer) {
-      setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${customer._id}`)
+      setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${customer._id}2b`)
     } else {
       if (bookingData.booking && step === 1) {
-        setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${userData.user?._id}`)
+        setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${userData.user?._id}2b`)
       }
     }
   }, [bookingData.booking, userData.user?._id, bookingData.currentStep, customer])
@@ -263,7 +264,7 @@ const ChoosePayment = ({ customer }) => {
         </div>
 
         <div className="flex flex-col gap-2 p-3 text-[14px] items-center border-[#cfcfcf] border-[1px]">
-          <img className="w-[50%]" src={qrUrl} />
+          <img className="w-[50%]" src={url} />
           <div className="flex flex-col items-center">
             <span className="rounded-md text-[12px]">
               Tên chủ TK: THAI ANH THU
