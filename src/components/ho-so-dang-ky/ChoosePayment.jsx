@@ -20,7 +20,7 @@ const ChoosePayment = () => {
   const { appointmentHandler, appointmentData } =
     useContext(appointmentContext);
   const router = useRouter();
-  const qrUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${userData.user?._id}2b`;
+  const qrUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${bookingData.patient?._id}2b`;
 
   useEffect(() => {
     if (bookingData.doctorRecord) {
