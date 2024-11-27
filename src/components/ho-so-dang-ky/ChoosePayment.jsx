@@ -13,14 +13,23 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect } from "react";
 import { io } from "socket.io-client";
 const socket = io.connect(baseURL);
-const ChoosePayment = () => {
+const ChoosePayment = ({ customer }) => {
   const { bookingData, bookingHandler } = useContext(bookingContext);
   const { globalHandler } = useContext(globalContext);
   const { userData } = useContext(userContext);
   const { appointmentHandler, appointmentData } =
     useContext(appointmentContext);
   const router = useRouter();
-  const qrUrl = `https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${bookingData.patient?._id}2b`;
+
+  useEffect(() => {
+    if (customer) {
+      setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${customer._id}`)
+    } else {
+      if (bookingData.booking && step === 1) {
+        setUrl(`https://qr.sepay.vn/img?bank=MBBank&acc=0834885704&template=compact&amount=${bookingData.booking?.priceList?.price}&des=MaKH${userData.user?._id}`)
+      }
+    }
+  }, [bookingData.booking, userData.user?._id, bookingData.currentStep, customer])
 
   useEffect(() => {
     if (bookingData.doctorRecord) {
