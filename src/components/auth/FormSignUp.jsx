@@ -13,7 +13,7 @@ const FormSignUp = ({ visible, hidden }) => {
   const { userHandler, userData } = useContext(userContext);
   const [verification, setVerification] = useState();
   const [otp, setOtp] = useState("");
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(1);
   const { authHandler } = useContext(authContext);
   const [info, setInfo] = useState({
     phone: "",
