@@ -44,7 +44,6 @@ const AuthContext = ({ children }) => {
   //     }, 500);
   //   }
   // }, [visibleSignUp, userData.user])
-
   useEffect(() => {
     api({ type: TypeHTTP.GET, sendToken: false, path: '/assessments/getAll' })
       .then(res => setAssessments(res))
