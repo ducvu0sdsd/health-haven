@@ -83,16 +83,14 @@ const GlobalProvider = ({ children }) => {
   useEffect(() => {
     const accessToken = globalThis.localStorage.getItem('accessToken')
     const pathnames = [
-      "ho-so",
       "cam-nang",
       "chi-tiet-cam-nang",
-      "zero",
       "cong-dong",
       "chi-tiet-cau-hoi",
       "cuoc-tro-chuyen",
     ];
     const patientPathnames = [
-      "/cuoc-hen-cua-ban"
+      "/cuoc-hen-cua-ban",
     ];
     const doctorPathname = [
       "/phieu-dang-ky",
@@ -101,6 +99,7 @@ const GlobalProvider = ({ children }) => {
       "/benh-nhan-cua-toi",
       "/thong-ke-doanh-thu",
       "/doanh-thu-cua-toi",
+      "/ho-so"
     ];
     if (pathname.includes("location")) {
 
@@ -120,7 +119,6 @@ const GlobalProvider = ({ children }) => {
 
         // nêú là patient
         else if (userData.user.role === "USER") {
-          console.log(111)
           if (doctorPathname.includes(pathname)) {
             // router.push("/");
           }
