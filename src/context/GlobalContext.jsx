@@ -87,6 +87,11 @@ const GlobalProvider = ({ children }) => {
       "chi-tiet-cam-nang",
       "cong-dong",
       "chi-tiet-cau-hoi",
+      "cac-dich-vu", // sửa ở đây
+      "bac-si-noi-bat", // sửa ở đây
+      "ho-so-dang-ky", // sửa ở đây
+      "zero", // sửa ở đây
+      "ho-so-bac-si", // sửa ở đây
     ];
     const patientPathnames = [
       "/cac-dich-vu",
@@ -96,6 +101,12 @@ const GlobalProvider = ({ children }) => {
       "/ho-so-suc-khoe",
       "/theo-doi-suc-khoe",
       "/kham-suc-khoe-tai-nha",
+      "/zero", // sửa ở đây
+      "/ho-so-dang-ky-tai-nha",// sửa ở đây
+      "/ho-so-dang-ky", // sửa ở đây
+      "/ho-so-dang-ky-theo-doi-suc-khoe", // sửa ở đây
+      "/ho-so", // sửa ở đây
+      "/kham-tong-quat", // sửa ở đây // thiếu url khám theo loại bệnh
       "/",
     ];
     const doctorPathname = [
