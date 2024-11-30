@@ -134,19 +134,19 @@ const FormRecordPatient = ({ hidden, visible, setVisibleStatusUpdated }) => {
       style={
         visible
           ? {
-              height: "95%",
-              width: "65%",
-              transition: "0.3s",
-              backgroundSize: "cover",
-              overflow: "auto",
-              backgroundImage: "url(/bg.png)",
-            }
+            height: "95%",
+            width: "65%",
+            transition: "0.3s",
+            backgroundSize: "cover",
+            overflow: "auto",
+            backgroundImage: "url(/bg.png)",
+          }
           : {
-              height: 0,
-              width: 0,
-              transition: "0.3s",
-              overflow: "hidden",
-            }
+            height: 0,
+            width: 0,
+            transition: "0.3s",
+            overflow: "hidden",
+          }
       }
       className="z-[41] shadow-xl w-[300px] min-h-[100px] bg-[white] rounded-lg fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
