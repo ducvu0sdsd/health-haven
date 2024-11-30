@@ -87,19 +87,27 @@ const GlobalProvider = ({ children }) => {
       "chi-tiet-cam-nang",
       "cong-dong",
       "chi-tiet-cau-hoi",
-      "cuoc-tro-chuyen",
     ];
     const patientPathnames = [
+      "/cac-dich-vu",
+      "/bac-si-noi-bat",
       "/cuoc-hen-cua-ban",
+      "/ho-so-bac-si",
+      "/ho-so-suc-khoe",
+      "/theo-doi-suc-khoe",
+      "/kham-suc-khoe-tai-nha",
+      "/",
     ];
     const doctorPathname = [
-      "/phieu-dang-ky",
-      "/ho-so-ca-nhan-bac-si",
-      "/them-cam-nang",
-      "/benh-nhan-cua-toi",
       "/thong-ke-doanh-thu",
       "/doanh-thu-cua-toi",
-      "/ho-so"
+      "/phieu-dang-ky",
+      "/benh-nhan-cua-toi",
+      "/cuoc-tro-chuyen",
+      "/ho-so-ca-nhan-bac-si",
+      "/them-cam-nang",
+      "/ho-so",
+      "/"
     ];
     if (pathname.includes("location")) {
 
@@ -119,28 +127,20 @@ const GlobalProvider = ({ children }) => {
 
         // nêú là patient
         else if (userData.user.role === "USER") {
-          if (doctorPathname.includes(pathname)) {
-            // router.push("/");
+          if (!pathnames.includes(pathname.split("/")[1]) && !patientPathnames.includes('/' + pathname.split("/")[1])) {
+            router.push('/')
           }
         }
 
         // nếu là doctor
         else {
-          if (patientPathnames.includes(pathname)) {
-            router.push("/phieu-dang-ky");
-          }
-          if (pathnames.includes(pathname.split("/")[1])) {
+          if (!pathnames.includes(pathname.split("/")[1]) && !doctorPathname.includes('/' + pathname.split("/")[1])) {
             router.push("/phieu-dang-ky");
           }
         }
       } else {
-        if (
-          doctorPathname.includes(pathname) ||
-          patientPathnames.includes(pathname)
-        ) {
-          if (!accessToken) {
-            router.push("/");
-          }
+        if (!pathnames.includes(pathname.split("/")[1])) {
+          router.push("/");
         }
       }
     }
