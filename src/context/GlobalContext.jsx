@@ -92,6 +92,9 @@ const GlobalProvider = ({ children }) => {
       "ho-so-dang-ky", // sửa ở đây
       "zero", // sửa ở đây
       "ho-so-bac-si", // sửa ở đây
+      "dich-vu",
+      "zego",
+      "meet",
     ];
     const patientPathnames = [
       "/cac-dich-vu",
@@ -124,7 +127,6 @@ const GlobalProvider = ({ children }) => {
 
     } else {
       if (userData.user) {
-        console.log
         //nếu là admin
         if (userData.user.role === "ADMIN") {
           notify(
@@ -135,14 +137,12 @@ const GlobalProvider = ({ children }) => {
           globalThis.localStorage.removeItem("accessToken");
           globalThis.localStorage.removeItem("refreshToken");
         }
-
         // nêú là patient
         else if (userData.user.role === "USER") {
           if (!pathnames.includes(pathname.split("/")[1]) && !patientPathnames.includes('/' + pathname.split("/")[1])) {
             router.push('/')
           }
         }
-
         // nếu là doctor
         else {
           if (!pathnames.includes(pathname.split("/")[1]) && !doctorPathname.includes('/' + pathname.split("/")[1])) {
