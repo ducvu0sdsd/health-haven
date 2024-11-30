@@ -48,8 +48,7 @@ const FormChuyenBacSi = ({ visibleTransfer, logBook, hidden }) => {
         message: "Đang chờ bác sĩ xác nhận"
       }
     }
-
-
+    globalHandler.notify(notifyType.LOADING, `Đang chuyển hồ sơ bệnh nhân cho bác sĩ ${doctor.doctor.fullName}`)
     api({ type: TypeHTTP.POST, sendToken: true, path: '/healthLogBooks/transfer-doctor', body })
       .then(res => {
         healthHandler.setLogBooks(prev => prev.map(item => {
