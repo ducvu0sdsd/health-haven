@@ -178,7 +178,7 @@ const FormDetailAppointment = ({
             </span>
             <span>
               Chiều cao:{" "}
-              {data?.height === 0 ? "Không" : data?.weight}
+              {data?.height === 0 ? "Không" : data?.height} {/* sửa ở đây */}
             </span>
             <span>
               Nhịp Tim:{" "}

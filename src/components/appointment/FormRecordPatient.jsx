@@ -209,7 +209,7 @@ const FormRecordPatient = ({ hidden, visible, setVisibleStatusUpdated }) => {
               <span className="font-semibold px-2 mt-[1rem]">Chiều cao:</span>
               {appointmentData.medicalRecord?.height === 0
                 ? "Không"
-                : appointmentData.medicalRecord?.height + " kg"}
+                : appointmentData.medicalRecord?.height + " cm"}
             </div>
             <div>
               <span className="font-semibold px-2 mt-[1rem]">Nhiệt độ:</span>
