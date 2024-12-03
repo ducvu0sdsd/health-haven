@@ -56,42 +56,14 @@ const CuocHenCuaBan = () => {
   }, []);
 
   useEffect(() => {
-    if (appointments.length > 0) {
-      const theFirstAppointment = sortByAppointmentDate(
-        appointments.filter(
-          (item) => item.status === "ACCEPTED"
-        )
-      ).filter((item) =>
-        compareTimeDate1GreaterThanDate2(
-          item.appointment_date,
-          convertDateToDayMonthYearTimeObject(
-            new Date().toISOString()
-          )
-        )
-      )[0];
-      if (theFirstAppointment) {
-        if (
-          compare2Date(
-            convertDateToDayMonthYearTimeObject(
-              new Date().toISOString()
-            ),
-            theFirstAppointment.appointment_date
-          )
-        ) {
-          if (
-            isALargerWithin10Minutes(
-              theFirstAppointment.appointment_date.time,
-              time
-            ) ||
-            isALargerWithin60Minutes(
-              time,
-              theFirstAppointment.appointment_date.time
-            )
-          ) {
-            setDisplayConnect(theFirstAppointment._id);
+    if (appointments.length > 0) {  /* sửa ở đây */
+      sortByAppointmentDate(appointments.filter((item) => item.status === "ACCEPTED")).forEach((item) => {
+        if (compare2Date(convertDateToDayMonthYearTimeObject(new Date().toISOString()), item.appointment_date)) {
+          if (isALargerWithin10Minutes(item.appointment_date.time, time) || isALargerWithin60Minutes(time, item.appointment_date.time)) {
+            setDisplayConnect(item._id);
           }
         }
-      }
+      })
     }
   }, [appointments, time]);
 
