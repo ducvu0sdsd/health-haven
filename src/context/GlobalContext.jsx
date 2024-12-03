@@ -95,6 +95,7 @@ const GlobalProvider = ({ children }) => {
       "dich-vu",
       "zego",
       "meet",
+      "danh-sach-thuoc"
     ];
     const patientPathnames = [
       "/cac-dich-vu",
