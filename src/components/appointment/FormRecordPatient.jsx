@@ -261,7 +261,7 @@ const FormRecordPatient = ({ hidden, visible, setVisibleStatusUpdated }) => {
               <span className="font-semibold px-2 mt-[1rem]">Nhịp tim:</span>
               {appointmentData.medicalRecord?.healthRate === 0
                 ? "Không"
-                : appointmentData.medicalRecord?.healthRate + " bpm"}
+                : appointmentData.medicalRecord?.healthRate + " nhịp/phút"}
             </div>
             <div>
               <span className="font-semibold px-2 mt-[1rem]">Cân nặng:</span>
@@ -279,7 +279,7 @@ const FormRecordPatient = ({ hidden, visible, setVisibleStatusUpdated }) => {
               <span className="font-semibold px-2 mt-[1rem]">Nhiệt độ:</span>
               {appointmentData.medicalRecord?.temperature === 0
                 ? "Không"
-                : appointmentData.medicalRecord?.temperature + " bpm"}
+                : appointmentData.medicalRecord?.temperature + " °C"}
             </div>
             <div className="flex items-center gap-2">
               <span className="font-semibold px-2">Tái khám:</span>

@@ -174,29 +174,29 @@ const FormDetailAppointment = ({
           <div className="flex items-center gap-5 text-[13px]">
             <span>
               Cân Nặng:{" "}
-              {data?.weight === 0 ? "Không" : data?.weight}
+              {data?.weight === 0 ? "Không" : data?.weight + ' kg'}
             </span>
             <span>
               Chiều cao:{" "}
-              {data?.height === 0 ? "Không" : data?.height} {/* sửa ở đây */}
+              {data?.height === 0 ? "Không" : data?.height + ' cm'} {/* sửa ở đây */}
             </span>
             <span>
               Nhịp Tim:{" "}
               {data?.healthRate === 0
                 ? "Không"
-                : data?.healthRate}
+                : data?.healthRate + ' nhịp/phút'}
             </span>
             <span>
               Huyết Áp:{" "}
               {data?.bloodPressure === ""
                 ? "Không"
-                : data?.bloodPressure}
+                : data?.bloodPressure + ' mmHg'}
             </span>
             <span>
               Nhiệt độ:{" "}
               {data?.temperature === 0
                 ? "Không"
-                : data?.temperature}
+                : data?.temperature + ' °C'}
             </span>
           </div>
         </div>
