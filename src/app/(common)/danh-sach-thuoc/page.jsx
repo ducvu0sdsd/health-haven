@@ -12,13 +12,34 @@ import React, { useContext, useEffect, useState } from "react";
 const DanhSachThuoc = () => {
   const { appointmentData, appointmentHandler } = useContext(appointmentContext);
   const [medicals, setMedicals] = useState([])
-
+  const [filterMedicine, setFilterMedicine] = useState([])
+  const [searchTerm, setSearchTerm] = useState("");
+  // api thuốc của jiohealth
   useEffect(() => {
     axios.post('https://prod.jiohealth.com:8443/jio-search/v1/search/retail/products-advance?offset=0&limit=315&sortName=PRICE&isDescending=false&categories=82&token=b161dc46-207d-11ee-aa37-02b973dc30b0&userID=1')
       .then(res => {
         setMedicals(res.data.data.products)
+        setFilterMedicine(res.data.data.products)
       })
   }, []);
+  const handleFindMedicine = (e) => { // sửa ở đây
+    const searchValue = e.target.value;
+    setSearchTerm(searchValue);
+
+    if (searchValue.trim() === "") {
+      const filtered = medicals.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+     
+      setFilterMedicine(filtered);
+    } else {
+      const filtered = medicals.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      
+      setFilterMedicine(filtered);
+    }
+  };
   return (
     <>
       <div className="w-full min-h-screen pt-[60px] pb-4 flex flex-col background-public">
@@ -40,8 +61,17 @@ const DanhSachThuoc = () => {
         <div className="flex px-[5%] flex-col gap-2 text-[30px] font-bold text-[#171717] mt-[4rem] w-[100%] items-center">
           <span>Danh sách thuốc trong HealthHaven</span>
           <div className="bg-[#35a4ffa1] w-[100px] h-[2px] rounded-lg"></div>
+          <div className="w-[60%] relative mt-[1rem]">
+            <input
+              value={searchTerm}
+              placeholder="Tìm thuốc..."
+              className="text-[14px] h-[50px] w-[100%] focus:outline-0 border-[1px] pl-[3rem] pr-[1rem] border-[#dadada] rounded-3xl"
+              onChange={handleFindMedicine}
+            />
+            <i className="bx bx-search absolute top-[50%] translate-y-[-50%] text-[23px] text-[#999] left-4"></i>
+          </div>
           <div className="mt-[1.5rem] grid grid-cols-4 w-[95%] gap-3">
-            {medicals.map((medical, index) => (
+            {filterMedicine.map((medical, index) => (
               <div
                 key={index}
                 className={`flex cursor-pointer flex-col items-center gap-3 px-6 justify-start w-full bg-[white] h-[200px] rounded-2xl shadow-xl shadow-[#35a4ff2a]`}
