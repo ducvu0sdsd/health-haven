@@ -436,9 +436,9 @@ const FormRecordPatientHome = ({ medicalRecord, type, setType, setTemporary, doc
                 <th scope="col" className="w-[15%] py-2">
                   Đơn vị
                 </th>
-                <th scope="col" className="w-[15%] py-2">
+                {/* <th scope="col" className="w-[15%] py-2">
                   Thao Tác
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody className=" w-[full] bg-black font-medium">
@@ -458,7 +458,7 @@ const FormRecordPatientHome = ({ medicalRecord, type, setType, setTemporary, doc
                   </td>
                   <td className="py-2">{medical.quantity}</td>
                   <td className="py-2">{medical.unitOfCalculation}</td>
-                  <td className="py-2 flex justify-between">
+                  {/* <td className="py-2 flex justify-between">
                     <button
                       className="hover:scale-[1.05] transition-all text-[14px] bg-[red] flex justify-center items-center w-[55px] text-[white] mt-2 h-[37px] rounded-lg"
                       onClick={() => {
@@ -467,7 +467,7 @@ const FormRecordPatientHome = ({ medicalRecord, type, setType, setTemporary, doc
                     >
                       Xóa
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
