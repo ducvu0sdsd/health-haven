@@ -59,7 +59,7 @@ const DanhSachThuoc = () => {
           {/* <img className='absolute right-6s' src='/logo.png' width={'150px'} /> */}
         </div>
         <div className="flex px-[5%] flex-col gap-2 text-[30px] font-bold text-[#171717] mt-[4rem] w-[100%] items-center">
-          <span>Danh sách thuốc trong HealthHaven</span>
+          <span>Danh sách thuốc trong HealthHaven 1111</span>
           <div className="bg-[#35a4ffa1] w-[100px] h-[2px] rounded-lg"></div>
           <div className="w-[60%] relative mt-[1rem]">
             <input
