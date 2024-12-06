@@ -140,33 +140,39 @@ const FormSignUp = ({ visible, hidden }) => {
       return;
     }
     globalHandler.notify(notifyType.LOADING, "Đang xác thực tài khoản");
-    // verification
-    //   .confirm(otp)
-    //   .then((data) => {
-    //   })
-    //   .catch(() => {
-
-    //   });
-    let user = { ...userData.user, processSignup: 2 };
-    api({
-      type: TypeHTTP.POST,
-      body: { ...user },
-      path: `/auth/update`,
-      sendToken: false,
-    })
-      .then((res) => {
-        userHandler.setUser(res);
-        globalHandler.notify(
-          notifyType.SUCCESS,
-          "Xác Thực Tài Khoản Thành Công"
-        );
+    verification
+      .confirm(otp)
+      .then((data) => {
+        console.log(data);
+        
+        let user = { ...userData.user, processSignup: 2 };
+        api({
+          type: TypeHTTP.POST,
+          body: { ...user },
+          path: `/auth/update`,
+          sendToken: false,
+        })
+          .then((res) => {
+            userHandler.setUser(res);
+            globalHandler.notify(
+              notifyType.SUCCESS,
+              "Xác Thực Tài Khoản Thành Công"
+            );
+          })
       })
       .catch(() => {
         globalHandler.notify(
-          notifyType.FAIL,
-          "Xác minh thất bại, Vui lòng thử lại"
-        );
+              notifyType.FAIL,
+              "Xác minh thất bại, Vui lòng thử lại"
+            );
       });
+   
+      // .catch(() => {
+      //   globalHandler.notify(
+      //     notifyType.FAIL,
+      //     "Xác minh thất bại, Vui lòng thử lại"
+      //   );
+      // });
   };
 
   const handleCompleteInfo = () => {

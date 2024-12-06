@@ -26,15 +26,16 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 //     measurementId: "G-H6NVCRBFZJ"
 // };
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDROVWxMdW3k4GytVEZEZZbXoJKGstLFlU",
-    authDomain: "healthhaven-ba506.firebaseapp.com",
-    projectId: "healthhaven-ba506",
-    storageBucket: "healthhaven-ba506.appspot.com",
-    messagingSenderId: "446064924415",
-    appId: "1:446064924415:web:3931f260034e7c99e59eca",
-    measurementId: "G-VSDN2BRSE5"
-};
+    apiKey: "AIzaSyDcesHdThiEsFH-KCLRmgSJcKooNEo0yx8",
+    authDomain: "autonomous-time-443911-i3.firebaseapp.com",
+    projectId: "autonomous-time-443911-i3",
+    storageBucket: "autonomous-time-443911-i3.firebasestorage.app",
+    messagingSenderId: "450494084881",
+    appId: "1:450494084881:web:7a37a93d068d4aa2bf3eb0",
+    measurementId: "G-6R2WCQ9G9E"
+  };
 
 
 // Initialize Firebase
