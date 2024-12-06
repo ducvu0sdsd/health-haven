@@ -122,18 +122,14 @@ const FormSignIn = ({ visible, hidden }) => {
             return
         }
         globalHandler.notify(notifyType.LOADING, 'Đang xác thực tài khoản')
-        // verification.confirm(otp)
-        //     .then(data => {
-        //         globalHandler.notify(notifyType.SUCCESS, 'Xác Thực Tài Khoản Thành Công')
-        //         setCurrentStep(4)
-        //     })
-        //     .catch(() => {
-        //         globalHandler.notify(notifyType.FAIL, 'Mã xác minh không đúng')
-        //     })
-        setTimeout(() => {
-            globalHandler.notify(notifyType.SUCCESS, 'Xác Thực Tài Khoản Thành Công')
-            setCurrentStep(4)
-        }, 1000);
+        verification.confirm(otp)
+            .then(data => {
+                globalHandler.notify(notifyType.SUCCESS, 'Xác Thực Tài Khoản Thành Công')
+                setCurrentStep(4)
+            })
+            .catch(() => {
+                globalHandler.notify(notifyType.FAIL, 'Mã xác minh không đúng')
+            })
     }
 
     return (
