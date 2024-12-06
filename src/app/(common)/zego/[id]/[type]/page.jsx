@@ -81,10 +81,24 @@ const Zego = () => {
         fullName
       );
     const zc = ZegoUIKitPrebuilt.create(kitToken);
-    zc.hangUp();
-    // chổ này là dùng để dọn dẹp dữ liệu phòng meet chứ bth tắt là nó còn chạy meet đó bên phía server zego nên là phải có chổ này
-
-    // còn m muốn khi 1 người out thì thằng kia out luôn thì phải thêm tí socket
+    if (type === "patient") {
+      authHandler.showAssessment();
+      zc.hangUp();
+    } else {
+      const res = await api({
+        path: `/medicalRecords/check-appointment`,
+        type: TypeHTTP.POST,
+        body: { appointment: id },
+        sendToken: false,
+      });
+      api({
+        path: `/medicalRecords/send-mail/${res._id}`,
+        type: TypeHTTP.POST,
+        sendToken: false,
+      });
+      globalThis.window.location.href = deploy;
+      zc.hangUp();
+    }
   };
 
   const myMeeting = async (element) => {
