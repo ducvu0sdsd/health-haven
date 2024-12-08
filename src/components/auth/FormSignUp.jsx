@@ -15,6 +15,7 @@ const FormSignUp = ({ visible, hidden }) => {
   const [otp, setOtp] = useState("");
   const [currentStep, setCurrentStep] = useState(1);
   const { authHandler } = useContext(authContext);
+  const [role, setRole] = useState()
   const [info, setInfo] = useState({
     phone: "",
     password: "",
@@ -123,7 +124,8 @@ const FormSignUp = ({ visible, hidden }) => {
       path: "/auth/signup",
     })
       .then((res) => {
-        userHandler.setUser(res);
+        userHandler.setUser(res.auth);
+        setRole(res.role)
         globalHandler.notify(
           notifyType.SUCCESS,
           "Đăng Ký Tài Khoản Thành Công"
@@ -151,11 +153,15 @@ const FormSignUp = ({ visible, hidden }) => {
           sendToken: false,
         })
           .then((res) => {
-            userHandler.setUser(res);
-            globalHandler.notify(
-              notifyType.SUCCESS,
-              "Xác Thực Tài Khoản Thành Công"
-            );
+            if (role === 'CUSTOMER') {
+              globalThis.window.location.reload()
+            } else {
+              userHandler.setUser(res);
+              globalHandler.notify(
+                notifyType.SUCCESS,
+                "Xác Thực Tài Khoản Thành Công"
+              );
+            }
           })
       })
       .catch(() => {

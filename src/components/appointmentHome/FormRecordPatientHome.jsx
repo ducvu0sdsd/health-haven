@@ -2,7 +2,7 @@ import { appointmentContext } from '@/context/AppointmentContext';
 import { globalContext, notifyType } from '@/context/GlobalContext';
 import { utilsContext } from '@/context/UtilsContext';
 import { api, TypeHTTP } from "@/utils/api";
-import { convertDateToDayMonthYearVietNam } from "@/utils/date";
+import { convertDateToDayMonthYearVietNam, editNumber } from "@/utils/date";
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 const FormRecordPatientHome = ({ medicalRecord, type, setType, setTemporary, doctorRecord1, appointmentHome1, setReload }) => {
@@ -33,7 +33,7 @@ const FormRecordPatientHome = ({ medicalRecord, type, setType, setTemporary, doc
       setDiagnosisDisease(medicalRecord.diagnosisDisease)
       setSymptoms(medicalRecord.symptoms)
       setNote(medicalRecord.note)
-      setReAppointmentDate(`${medicalRecord.reExaminationDate.year}-${medicalRecord.reExaminationDate.month}-${medicalRecord.reExaminationDate.day}`)
+      setReAppointmentDate(`${medicalRecord.reExaminationDate.year}-${editNumber(medicalRecord.reExaminationDate.month)}-${editNumber(medicalRecord.reExaminationDate.day)}`)
       setTemperature(medicalRecord.temperature)
       setBloodPressure(medicalRecord.bloodPressure)
       setHealthRate(medicalRecord.healthRate)
