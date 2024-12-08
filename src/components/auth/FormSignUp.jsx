@@ -153,14 +153,16 @@ const FormSignUp = ({ visible, hidden }) => {
           sendToken: false,
         })
           .then((res) => {
+            globalHandler.notify(
+              notifyType.SUCCESS,
+              "Xác Thực Tài Khoản Thành Công"
+            );
             if (role === 'CUSTOMER') {
-              globalThis.window.location.reload()
+              setTimeout(() => {
+                globalThis.window.location.reload()
+              }, 2000);
             } else {
               userHandler.setUser(res);
-              globalHandler.notify(
-                notifyType.SUCCESS,
-                "Xác Thực Tài Khoản Thành Công"
-              );
             }
           })
       })
