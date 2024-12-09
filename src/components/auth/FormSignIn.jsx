@@ -29,6 +29,19 @@ const FormSignIn = ({ visible, hidden }) => {
     const [otp, setOtp] = useState('')
     const router = useRouter()
 
+    const handleCheckAuth = () => {
+
+            if (!/^0[0-9]{9}$/.test(phone)) {
+                globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ") // sửa ở đây
+                return
+            }
+            api({ path: '/auth/auth/check-auth', type: TypeHTTP.POST, body: { phone } })
+                .then(res => {
+                    setCurrentStep(3)
+                }).catch(error => {
+                    globalHandler.notify(notifyType.WARNING, "Số điện thoại không tồn tại")
+                })
+    }
     const handleSubmitChangePassword = () => {
         if (password.length < 6) {
             globalHandler.notify(notifyType.WARNING, "Mật khẩu phải lớn hơn 6 ký tự")
@@ -43,12 +56,8 @@ const FormSignIn = ({ visible, hidden }) => {
             .then(res => {
                 globalHandler.notify(notifyType.SUCCESS, "Đổi mật khẩu thành công")
                 setCurrentStep(1)
-            }).catch(error => {
-                globalHandler.notify(notifyType.WARNING, "Tài khoản không tồn tại")
-                globalHandler.reload() // sửa ở đây
             })
     }
-
     const handleSignIn = () => {
         if (!/^0[0-9]{9}$/.test(info.userName)) {
             globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ")
@@ -160,13 +169,7 @@ const FormSignIn = ({ visible, hidden }) => {
                             <h2 className='text-[20px] font-medium '>Xác minh số điện thoại của bạn</h2>
                             <span className='text-[13px]'>Vui lòng nhập số điện thoại của bạn bên dưới</span>
                             <input onChange={e => setPhone(e.target.value)} value={phone} placeholder='Số Điện Thoại' className='text-[14px] mt-2 w-[90%] h-[40px] bg-[white] border-[1px] border-[#cfcfcf] focus:outline-0 rounded-lg px-4' />
-                            <button onClick={() => {
-                                if (!/^0[0-9]{9}$/.test(phone)) {
-                                    globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ")
-                                    return
-                                }
-                                setCurrentStep(3)
-                            }} className='hover:scale-[1.05] transition-all text-[14px] bg-[blue] px-[3rem] w-[270px] text-[white] mt-2 h-[37px] rounded-lg'>Xác Thực Tài Khoản</button>
+                            <button onClick={() => handleCheckAuth()} className='hover:scale-[1.05] transition-all text-[14px] bg-[blue] px-[3rem] w-[270px] text-[white] mt-2 h-[37px] rounded-lg'>Xác Thực Tài Khoản</button>
                         </div>
                     </div>
                     <div className='min-w-[100%] h-full px-[2rem] py-[1.5rem] flex justify-center'>
