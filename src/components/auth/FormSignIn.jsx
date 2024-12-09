@@ -35,7 +35,7 @@ const FormSignIn = ({ visible, hidden }) => {
                 globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ") // sửa ở đây
                 return
             }
-            api({ path: '/auth/auth/check-auth', type: TypeHTTP.POST, body: { phone } })
+            api({ path: '/auth/check-auth', type: TypeHTTP.POST, body: { phone } })
                 .then(res => {
                     setCurrentStep(3)
                 }).catch(error => {
