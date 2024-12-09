@@ -43,6 +43,9 @@ const FormSignIn = ({ visible, hidden }) => {
             .then(res => {
                 globalHandler.notify(notifyType.SUCCESS, "Đổi mật khẩu thành công")
                 setCurrentStep(1)
+            }).catch(error => {
+                globalHandler.notify(notifyType.WARNING, "Tài khoản không tồn tại")
+                globalHandler.reload() // sửa ở đây
             })
     }
 
