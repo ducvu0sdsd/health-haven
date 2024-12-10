@@ -23,7 +23,7 @@ import React, {
 } from "react";
 const Zego = () => {
   const param = useParams();
-  const { id, type } = param;
+  const { id, type, mobile } = param;
   const { userData } = useContext(userContext);
   const { authHandler, authData } = useContext(authContext);
   const { appointmentHandler, appointmentData } =
@@ -81,23 +81,27 @@ const Zego = () => {
         fullName
       );
     const zc = ZegoUIKitPrebuilt.create(kitToken);
-    if (type === "patient") {
-      authHandler.showAssessment();
+    if (mobile) {
       zc.hangUp();
     } else {
-      const res = await api({
-        path: `/medicalRecords/check-appointment`,
-        type: TypeHTTP.POST,
-        body: { appointment: id },
-        sendToken: false,
-      });
-      api({
-        path: `/medicalRecords/send-mail/${res._id}`,
-        type: TypeHTTP.POST,
-        sendToken: false,
-      });
-      globalThis.window.location.href = deploy;
-      zc.hangUp();
+      if (type === "patient") {
+        authHandler.showAssessment();
+        zc.hangUp();
+      } else {
+        const res = await api({
+          path: `/medicalRecords/check-appointment`,
+          type: TypeHTTP.POST,
+          body: { appointment: id },
+          sendToken: false,
+        });
+        api({
+          path: `/medicalRecords/send-mail/${res._id}`,
+          type: TypeHTTP.POST,
+          sendToken: false,
+        });
+        globalThis.window.location.href = deploy;
+        zc.hangUp();
+      }
     }
   };
 
