@@ -30,17 +30,16 @@ const FormSignIn = ({ visible, hidden }) => {
     const router = useRouter()
 
     const handleCheckAuth = () => {
-
-            if (!/^0[0-9]{9}$/.test(phone)) {
-                globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ") // sửa ở đây
-                return
-            }
-            api({ path: '/auth/check-auth', type: TypeHTTP.POST, body: { phone } })
-                .then(res => {
-                    setCurrentStep(3)
-                }).catch(error => {
-                    globalHandler.notify(notifyType.WARNING, "Số điện thoại không tồn tại")
-                })
+        if (!/^0[0-9]{9}$/.test(phone)) {
+            globalHandler.notify(notifyType.WARNING, "Số điện thoại không hợp lệ") // sửa ở đây
+            return
+        }
+        api({ path: '/auth/check-auth', type: TypeHTTP.POST, body: { phone } })
+            .then(res => {
+                setCurrentStep(3)
+            }).catch(error => {
+                globalHandler.notify(notifyType.WARNING, "Số điện thoại không tồn tại")
+            })
     }
     const handleSubmitChangePassword = () => {
         if (password.length < 6) {
@@ -162,6 +161,12 @@ const FormSignIn = ({ visible, hidden }) => {
                             </div>
                         </div>
                         <button onClick={() => hidden()}><i className='bx bx-x absolute right-2 top-2 text-[30px] text-[#5e5e5e]'></i></button>
+                        {currentStep !== 1 && (
+                            <button className='absolute left-2 top-2 flex items-center gap-1' onClick={() => setCurrentStep(prev => prev - 1)}>
+                                <i className='bx bx-chevron-left text-[30px] text-[#5e5e5e]'></i>
+                                <span className='text-[14px]'>Quay Về</span>
+                            </button>
+                        )}
                     </div>
                     <div className='min-w-[100%] h-full px-[2rem] py-[1.5rem] flex justify-center'>
                         <img src='/sign.png' width={'40%'} />
