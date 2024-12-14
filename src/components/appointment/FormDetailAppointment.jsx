@@ -32,7 +32,7 @@ const FormDetailAppointment = ({
         type: TypeHTTP.GET,
         sendToken: false,
         path: `/medicalRecords/findByPatient/${data?.patient?._id}`,
-      }).then((res) => setMedicalRecords(res));
+      }).then((res) => setMedicalRecords(res.reverse()));
     }
   }, [data]);
 

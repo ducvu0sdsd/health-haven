@@ -64,7 +64,7 @@ const FormDetailAppointmentHome = ({
         sendToken: false,
         path: `/medicalRecords/findByPatient/${data?.patient?._id}`,
       }).then((res) => {
-        setMedicalRecords(res);
+        setMedicalRecords(res.reverse());
       });
       api({
         path: `/medicalRecords/check-appointment`,
