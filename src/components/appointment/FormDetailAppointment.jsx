@@ -320,7 +320,7 @@ const FormDetailAppointment = ({
                 <span>{data?.note}</span>
               </span>
             )}
-            {!display && (
+            {display && (
               <button
                 onClick={() => {
                   hidden();
