@@ -27,6 +27,7 @@ const FormDetailAppointment = ({
   const [doctorRecord, setDoctorRecord] = useState();
   const { userData } = useContext(userContext);
   const [medicalRecords, setMedicalRecords] = useState([]);
+  const [medicalRecordsAll, setMedicalRecordsAll] = useState([]);
 
   // them phan thuoc
   const [screen, setScreen] = useState(0)
@@ -53,6 +54,13 @@ const FormDetailAppointment = ({
           setMedicalRecords(res)
           setCurrentMedicalRecord(res[res.length - 1])
         })
+      api({
+        type: TypeHTTP.GET,
+        sendToken: false,
+        path: `/medicalRecords/findByPatient/${data?.patient?._id}`,
+      }).then((res) => {
+        setMedicalRecordsAll(res.reverse());
+      });
     }
   }, [data]);
   useEffect(() => {
@@ -94,9 +102,9 @@ const FormDetailAppointment = ({
       symptoms: currentMedicalRecord.symptoms,
       date: convertDateToDayMonthYearTimeObject(new Date().toISOString()),
       reExaminationDate: {
-        day: splitDate[2] || "",
-        month: splitDate[1] || "",
-        year: splitDate[0] || "",
+        day: splitDate[2].replace('null', '') || "",
+        month: splitDate[1].replace('null', '') || "",
+        year: splitDate[0].replace('null', '') || "",
       },
     }
     utilsHandler.notify(notifyType.LOADING, "Đang lưu hồ sơ bệnh nhân")
@@ -161,7 +169,9 @@ const FormDetailAppointment = ({
       quantity: Number(quantity),
       unitOfCalculation: unitOfCalculation,
     };
-    setCurrentMedicalRecord({ ...currentMedicalRecord, medical: [...currentMedicalRecord.medical, newMedical] })
+    if (medicalRecords.length > 0) {
+      setCurrentMedicalRecord({ ...currentMedicalRecord, medical: [...currentMedicalRecord.medical, newMedical] })
+    }
     setMedical([...medical, newMedical]);
     setSelectedMedical()
     setNameMedical('')
@@ -310,7 +320,7 @@ const FormDetailAppointment = ({
                 <span>{data?.note}</span>
               </span>
             )}
-            {display && (
+            {!display && (
               <button
                 onClick={() => {
                   hidden();
@@ -320,7 +330,7 @@ const FormDetailAppointment = ({
                       : "doctor"
                     }`;
                 }}
-                className="hover:scale-[1.05] transition-all bg-[blue] text-[white] text-[13px] font-medium px-2 rounded-md py-1"
+                className="hover:scale-[1.05] transition-all bg-[blue] text-[white] text-[13px] font-medium px-2 w-[180px] rounded-md py-1"
               >
                 Tham Gia Cuộc Hẹn
               </button>
@@ -594,7 +604,7 @@ const FormDetailAppointment = ({
                       </tr>
                     </thead>
                     <tbody className=" w-[full] bg-black font-medium">
-                      {medicalRecords.map(
+                      {medicalRecordsAll.map(
                         (medicalRecord, index) => (
                           <tr
                             key={index}

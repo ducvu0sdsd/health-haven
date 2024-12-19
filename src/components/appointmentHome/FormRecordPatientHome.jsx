@@ -125,7 +125,9 @@ const FormRecordPatientHome = ({ type, setType, setTemporary, doctorRecord1, app
       quantity: Number(quantity),
       unitOfCalculation: unitOfCalculation,
     };
-    setCurrentMedicalRecord({ ...currentMedicalRecord, medical: [...currentMedicalRecord.medical, newMedical] })
+    if (medicalRecords.length > 0) {
+      setCurrentMedicalRecord({ ...currentMedicalRecord, medical: [...currentMedicalRecord.medical, newMedical] })
+    }
     setMedical([...medical, newMedical]);
     setSelectedMedical()
     setNameMedical('')
@@ -184,9 +186,9 @@ const FormRecordPatientHome = ({ type, setType, setTemporary, doctorRecord1, app
       symptoms: symptoms,
       note: note,
       reExaminationDate: {
-        day: splitDate[2] || "",
-        month: splitDate[1] || "",
-        year: splitDate[0] || "",
+        day: splitDate[2].replace('null', '') || "",
+        month: splitDate[1].replace('null', '') || "",
+        year: splitDate[0].replace('null', '') || "",
       },
       temperature: temperature,
       bloodPressure: bloodPressure,
